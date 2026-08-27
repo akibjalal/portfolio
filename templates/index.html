@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.name }} - Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>{{ data.name }}</h1>
+            <p class="subtitle">{{ data.title }}</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="card">
+            <h2>About Me</h2>
+            <p>{{ data.bio }}</p>
+        </section>
+
+        <section class="card">
+            <h2>Education</h2>
+            <div class="edu-item">
+                <h3>{{ data.education.degree }}</h3>
+                <p><strong>Institution:</strong> {{ data.education.institution }}</p>
+                <p><strong>Session:</strong> {{ data.education.session }}</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Skills</h2>
+            <div class="skills-group">
+                <h3>Programming Languages</h3>
+                <div class="tags">
+                    {% for lang in data.skills.languages %}
+                        <span class="tag">{{ lang }}</span>
+                    {% endfor %}
+                </div>
+
+                <h3>Tools & Environments</h3>
+                <div class="tags">
+                    {% for tool in data.skills.tools %}
+                        <span class="tag tag-tool">{{ tool }}</span>
+                    {% endfor %}
+                </div>
+
+                <h3>Soft Skills</h3>
+                <div class="tags">
+                    {% for soft in data.skills.soft_skills %}
+                        <span class="tag tag-soft">{{ soft }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                {% for project in data.projects %}
+                    <div class="project-card">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        <p class="tech-used"><strong>Technologies:</strong> {{ project.tech }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="card contact-card">
+            <h2>Contact Information</h2>
+            <p>📧 <strong>Email:</strong> <a href="mailto:{{ data.email }}">{{ data.email }}</a></p>
+            <p>📱 <strong>Phone:</strong> {{ data.phone }}</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 {{ data.name }}. All rights reserved.</p>
+    </footer>
+</body>
+</html>
